@@ -9,11 +9,11 @@
 
 
  /* *******************************************************************
- * 								GRUPO 2
- *	  David Barrios Portales 	71032890N     davidbarrios@usal.es
+ * 		GRUPO 2
+ *	  David Barrios     davidbarrios@usal.es
  *
  *	gcc -no-pie ej_grafos_colab_esqueleto.c grafos_colaborativo.o
- *  ./a.out 
+ *      ./a.out 
  * 
  *     *Es necesario usar -no-pie por la version de GCC*
  ******************************************************************* */
@@ -57,6 +57,8 @@ int Anadir_vertice(struct nodo_v **ady,int v1);
 int Eliminar_arista(struct nodo_v **ady,int v1,int v2);
 int Existe_arista(NODO_V *ADY, int V1, int V2);
 int Existe_vertice(NODO_V* ADY, int VI);
+void Borrar_listas_adyacencia(struct nodo_v **ADY);
+
 //::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
@@ -67,7 +69,7 @@ void presentacion (){
     // Funcion para presentar el programa.
     printf("\n\t-------------------------------------------");
     printf("\n\t          Grafos colaborativo");
-    printf("\n\tDavid Barrios Portales davidbarrios@usal.es");
+    printf("\n\t   David Barrios davidbarrios@usal.es");
     printf("\n\t-------------------------------------------\n\n\n");
 }
 //===================================================================================================================================
@@ -94,7 +96,8 @@ int cola_vacia(nodo_cola *ptro_cola)
 void encolar(int elemento,nodo_cola **entrada,nodo_cola **salida)
 {
 	nodo_cola *nuevo;	//puntero auxiliar
-	nuevo=(nodo_cola *)calloc(1,sizeof(nodo_cola));	
+	//nuevo=(nodo_cola *)calloc(1,sizeof(nodo_cola));	
+	nuevo=(nodo_cola *)malloc(sizeof(nodo_cola));	
 	if(nuevo==NULL)	//si nuevo es nulo
 	{
 		printf("ERROR. No hay memoria suficiente\n");	//Mensaje de control en el caso de que no haya memoria
@@ -154,7 +157,8 @@ void recorridoAnchura(NODO_V *ady, int v0, int n,char values[][100]){
 	NODO_V *p_v;	
 													//Creamos las variables necesarias
 	int v1,v2, elemento;
-	int *visitado = (int*) calloc (n,sizeof(int));	//Con esto indicamos si se visita
+	//int *visitado = (int*) calloc (n,sizeof(int));	//Con esto indicamos si se visita
+	int *visitado = (int*) malloc (sizeof(int));	//Con esto indicamos si se visita
 													//Iniciamos la cola
 	nodo_cola *entrada;	nodo_cola *salida;	
 													//Ponemos los punteros a nulo (NULL)
@@ -284,6 +288,10 @@ void main()
 	} 
 
 	/* 3- LIBERAR LA MEMORIA QUE OCUPA EL GRAFO */
+
+	//Borrar_listas_adyacencia(&grafo); //  ERROR
+
+	
 	for(i=0;i<NIGL;i++)								// Recorremos con el for
 	{
 		for(j=0;j<NIGL;j++)
@@ -320,6 +328,7 @@ void main()
 		Eliminar_vertice(&grafo,i);		// ERROR AL USAR ESTA FUNCION!!!
 	}
 	*/
+	
 
 
 	// DESCOMENTANDO ESTAS LINEAS, NOS SALE UN ERROR CON free()!!!
