@@ -10,11 +10,12 @@
 
  /* *******************************************************************
  * 								GRUPO 2
- *	  David Barrios     davidbarrios@usal.es
+ *	  David Barrios Portales 	71032890N     davidbarrios@usal.es
  *
- *  COMPILAR:
  *	gcc -no-pie ej_grafos_colab_esqueleto.c grafos_colaborativo.o
  *  ./a.out 
+ * 
+ *     *Es necesario usar -no-pie por la version de GCC*
  ******************************************************************* */
 
 
@@ -66,7 +67,7 @@ void presentacion (){
     // Funcion para presentar el programa.
     printf("\n\t-------------------------------------------");
     printf("\n\t          Grafos colaborativo");
-    printf("\n\tDavid Barrios davidbarrios@usal.es");
+    printf("\n\tDavid Barrios Portales davidbarrios@usal.es");
     printf("\n\t-------------------------------------------\n\n\n");
 }
 //===================================================================================================================================
@@ -273,7 +274,7 @@ void main()
 	
 	if ((opcion >= 1) && (opcion <= 6))					// Si la opcion es correcta, leemos el grafo en anchura
 	{
-		printf("\n -> El grafo es recorrido por anchura. \n");
+		printf("\n -> El grafo es recorrido por anchura. \n\n");
 		recorridoAnchura(grafo,(opcion-1),NIGL,iglesias);
 
 	}
@@ -310,22 +311,26 @@ void main()
 		printf("\n\n\nERROR al eliminar las aristas");			// Si se produce un error al eliminar una arista
 	} else
 	{
-		printf("\n\n\nAristas eliminadas");				// Si conseguimos eliminar todas las aristas 
+		printf("\n\n\nAristas eliminadas correctamente\n\n");				// Si conseguimos eliminar todas las aristas 
 	}
 	
 	/*	
 	for(i=0;i<NIGL;i++)
 	{	
 		Eliminar_vertice(&grafo,i);		// ERROR AL USAR ESTA FUNCION!!!
-	}*/
+	}
+	*/
 
+
+	// DESCOMENTANDO ESTAS LINEAS, NOS SALE UN ERROR CON free()!!!
+	/*
 	while(grafo->ENLACE!=NULL) 
 	{
 		p=grafo;	
 		grafo=grafo->ENLACE;		
 		free(p);	//libera la memoria del vertice
 	}
-
+	*/
 
 	grafo=NULL;
 
@@ -334,7 +339,7 @@ void main()
 	{	
 		if(Existe_vertice(grafo,i))
 		{
-			printf("\nError al eliminar vertices %d", i);
+			printf("\nError al elimina el vertices %d", i);
 		}
 	}
 
